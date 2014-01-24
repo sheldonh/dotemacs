@@ -40,3 +40,5 @@
   (message "%s" " done.")
   (dolist (p rad-packages)
     (when (not (package-installed-p p)) (package-install p))))
+
+(if (file-exists-p "~/.rvm") (setq rspec-use-rvm t))
