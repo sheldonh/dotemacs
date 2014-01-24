@@ -21,9 +21,12 @@
   '(
     gist
     helm
+    helm-cmd-t
     magit
     rspec-mode
+    ruby-end
     rvm
+    smart-tab
     yaml-mode
     wrap-region)
   "A list of packages that I want everywhere.")
@@ -41,4 +44,19 @@
   (dolist (p rad-packages)
     (when (not (package-installed-p p)) (package-install p))))
 
-(if (file-exists-p "~/.rvm") (setq rspec-use-rvm t))
+(eval-after-load "rspec-autoloads"
+  '(progn
+     (setq-default rspec-use-rvm (file-exists-p "~/.rvm"))))
+
+(require 'recentf)
+(recentf-mode t)
+(setq recentf-max-menu-items 25)
+
+(require 'helm-config)
+(require 'helm-cmd-t)
+(setq helm-ff-lynx-style-map nil
+      helm-input-idle-delay 0.1
+      helm-idle-delay 0.1)
+(require 'helm-C-x-b)
+(global-set-key (kbd "C-c t") 'helm-cmd-t)
+(global-set-key (kbd "C-c b") 'helm-C-x-b)
