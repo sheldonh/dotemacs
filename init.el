@@ -3,15 +3,18 @@
 (setq x-select-enable-clipboard t)
 (setq inteprogram-paste-function 'x-cut-buffer-or-selection-value)
 
-;; (add-to-list
-;;  'display-buffer-alist
-;;  '("\\*rspec-compilation\\*" display-buffer-reuse-window (reusable-frames . t)))
+(setq find-args "-name .git -prune -o -name \\*")
+
+(setq display-buffer-reuse-frames t)
+(add-to-list
+ 'display-buffer-alist
+ '("\\*rspec-compilation\\*" display-buffer-reuse-window (reusable-frames . t)))
 
 (require 'color-theme)
 (color-theme-initialize)
 (load-file "~/.emacs.d/color-theme-railscasts.el")
 (color-theme-railscasts)
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 140)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -44,9 +47,11 @@
   (dolist (p rad-packages)
     (when (not (package-installed-p p)) (package-install p))))
 
-(eval-after-load "rspec-autoloads"
-  '(progn
-     (setq-default rspec-use-rvm (file-exists-p "~/.rvm"))))
+(require 'rvm)
+(setq-default rspec-use-rvm (file-exists-p "~/.rvm"))
+
+(require 'smart-tab)
+(global-smart-tab-mode t)
 
 (require 'recentf)
 (recentf-mode t)
