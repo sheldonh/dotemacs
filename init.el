@@ -5,6 +5,8 @@
 
 (setq find-args "-name .git -prune -o -name \\*")
 
+(global-auto-revert-mode t)
+
 (setq display-buffer-reuse-frames t)
 (add-to-list
  'display-buffer-alist
