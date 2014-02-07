@@ -1,5 +1,7 @@
 (setq inhibit-startup-screen t)
 
+(setq backup-inhibited t)
+
 (setq x-select-enable-clipboard t)
 (setq inteprogram-paste-function 'x-cut-buffer-or-selection-value)
 
